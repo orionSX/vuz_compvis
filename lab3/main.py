@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-image = cv2.imread("D:\GitHub\compvis\lab3\my_img.jpg")
+image = cv2.imread("D:\Dev\\vuz_compvis\lab3\my_img.jpg")
 image_BW = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 
@@ -11,7 +11,10 @@ def gk(size, sigma):
     for i in range(size):
         for j in range(size):
             x, y = i - center, j - center
-            kernel[i, j] = np.exp(-(x**2 + y**2) / (2 * sigma**2))
+            kernel[i, j] = np.exp(-(x**2 + y**2) / (2 * sigma**2)) / (sigma* np.sqrt(2*np.pi))
+
+    
+
 
     return kernel / np.sum(kernel)
 
@@ -33,7 +36,7 @@ def gf(image, ksize, sigma):
 
 for size in [3, 5, 7]:
     kernel = gk(size, 1.0)
-    print(f"Матрица {size}x{size}:\n{kernel}\n")
+    # print(f"Матрица {size}x{size}:\n{kernel}\n")
 
 params = [
     (7, 1.5),
