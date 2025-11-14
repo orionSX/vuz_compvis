@@ -13,8 +13,8 @@ def main():
         return
 
     VideoFileManager.print_video_list(video_files)
-
-    trackers = {"csrt": CSRTTracker(), "kcf": KCFTracker(), "mosse": MOSSETracker()}
+    # "csrt": CSRTTracker(), "kcf": KCFTracker(),
+    trackers = {"mosse": MOSSETracker()}
 
     for tracker_name, tracker in trackers.items():
         print(f"\n{'^' * 50}")
