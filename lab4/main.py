@@ -157,7 +157,7 @@ def get_direction(angle):
             return 7
 
 
-def dtf(suppressed_grad_len, low_ratio=0.03, high_ratio=0.3):
+def dtf(suppressed_grad_len, low_ratio=0.1, high_ratio=0.2):
     height, width = suppressed_grad_len.shape
     result = np.zeros((height, width), dtype=np.uint8)
 
@@ -215,7 +215,7 @@ def dtf(suppressed_grad_len, low_ratio=0.03, high_ratio=0.3):
 
 
 def process_image(image_path):
-    print("=== ЗАДАНИЕ 1 ===")
+    
 
     image = cv2.imread(image_path)
     if image is None:
@@ -227,8 +227,8 @@ def process_image(image_path):
     cv2.imshow("1. Original", gray_image)
     cv2.waitKey(0)
 
-    kernel_size = 5
-    sigma = 1.5
+    kernel_size = 7
+    sigma = 2
     kernel = gk(kernel_size, sigma)
     kernel = norm_kern(kernel)
     filtered_image = gf(gray_image, kernel)
@@ -236,7 +236,7 @@ def process_image(image_path):
     cv2.imshow("2. Gauss", filtered_image)
     cv2.waitKey(0)
 
-    print("\n=== ЗАДАНИЕ 2 ===")
+   
 
     grad_len, angle = sobel(filtered_image)
 
@@ -252,7 +252,7 @@ def process_image(image_path):
     cv2.imshow("4. Angle", angle_normalized)
     cv2.waitKey(0)
 
-    print("\n=== ЗАДАНИЕ 3 ===")
+
 
     suppressed = nmax_supr(grad_len, angle)
 
@@ -262,7 +262,7 @@ def process_image(image_path):
     cv2.imshow("5. Supress nmax", suppressed_normalized)
     cv2.waitKey(0)
 
-    print("\n=== ЗАДАНИЕ 4 ===")
+
 
     final_edges = dtf(suppressed)
 
@@ -280,6 +280,6 @@ def process_image(image_path):
 
 
 if __name__ == "__main__":
-    image_path = "D:\Dev\\vuz_compvis\lab3\my_img.jpg"
+    image_path = "D:\Dev\\vuz_compvis\lab4\my_img.jpg"
 
     process_image(image_path)
